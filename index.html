@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hexagon Natural Fermentation - Eco Enzyme</title>
+
+    <!-- Google Fonts biar kelihatan premium -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== RESET & GLOBAL ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8faf6;
+            color: #1e2a23;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== NAVBAR ===== */
+        nav {
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 14px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(8px);
+            background-color: rgba(255, 255, 255, 0.88);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-nav {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        /* INI LOGO BUATAN (pake bentuk segi enam/hexagon dari CSS) biar gak perlu file gambar */
+        .logo-hex {
+            width: 48px;
+            height: 48px;
+            background-color: #2d6a4f;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 1.5rem;
+            transition: transform 0.2s;
+            flex-shrink: 0;
+        }
+        .logo-hex:hover {
+            transform: rotate(15deg) scale(1.05);
+        }
+
+        .logo-nav span {
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: #1b3b2d;
+            letter-spacing: -0.3px;
+        }
+        .logo-nav small {
+            font-weight: 400;
+            font-size: 0.7rem;
+            color: #5a7a6a;
+            display: block;
+            margin-top: -2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #2c3e3a;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #2d6a4f;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            padding: 50px 0 30px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #1e2a23;
+            margin-bottom: 6px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.2rem;
+            color: #4d6b5b;
+            max-width: 650px;
+            margin: 0 auto 16px auto;
+        }
+
+        .hero .tagline {
+            background-color: #e2f0e9;
+            color: #1b4b34;
+            padding: 6px 22px;
+            border-radius: 30px;
+            display: inline-block;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .hero .location-badge {
+            margin-top: 12px;
+            color: #5a7a6a;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        /* ===== SECTION UMUM ===== */
+        section {
+            padding: 60px 0;
+            border-bottom: 1px solid #eae5dc;
+        }
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e2a23;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .section-sub {
+            text-align: center;
+            color: #5a6e63;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ===== PRODUK ===== */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 24px 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid #f0ede7;
+            text-align: center;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.07);
+        }
+
+        /* Tempat gambar produk (nanti kamu isi) */
+        .product-card .product-img-placeholder {
+            width: 100%;
+            height: 160px;
+            background-color: #eef3ec;
+            border-radius: 14px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #8ba394;
+            font-size: 0.85rem;
+            border: 2px dashed #cddbd2;
+        }
+
+        .product-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1e2a23;
+            margin-bottom: 2px;
+        }
+
+        .product-card .price {
+            color: #2d6a4f;
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+
+        .product-card p {
+            color: #4f5f55;
+            font-size: 0.95rem;
+        }
+
+        /* ===== TENTANG KAMI ===== */
+        .about-wrapper {
+            display: flex;
+            gap: 50px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .about-text {
+            flex: 2;
+            min-width: 280px;
+        }
+
+        .about-text p {
+            margin-bottom: 16px;
+            color: #2d3d34;
+        }
+
+        .about-text .highlight-location {
+            background: #e2f0e9;
+            padding: 4px 14px;
+            border-radius: 20px;
+            display: inline-block;
+            font-weight: 600;
+            color: #1b4b34;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .about-image .about-img-placeholder {
+            width: 100%;
+            max-width: 300px;
+            height: 220px;
+            background-color: #eef3ec;
+            border-radius: 24px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #8ba394;
+            border: 2px dashed #cddbd2;
+            font-size: 0.9rem;
+        }
+
+        /* ===== KONTAK ===== */
+        .contact-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .contact-info {
+            background: #ffffff;
+            padding: 24px 35px;
+            border-radius: 20px;
+            border: 1px solid #f0ede7;
+            min-width: 220px;
+            text-align: center;
+        }
+
+        .contact-info .icon {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .contact-info h4 {
+            font-weight: 600;
+            color: #1e2a23;
+        }
+
+        .contact-info p {
+            color: #4f5f55;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background-color: #1e2a23;
+            color: #c6d4cb;
+            padding: 24px 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        footer span {
+            color: #b8cdbb;
+            font-weight: 600;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .nav-wrapper {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .nav-links {
+                gap: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .about-wrapper {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav>
+        <div class="container nav-wrapper">
+            <div class="logo-nav">
+                <!-- LOGO SEGI ENAM (Hexagon) tanpa file gambar -->
+                <img src="images/hexagonnaturalfermentation.jpeg" alt="Logo Hexagon" style="height: 48px; width: auto; border-radius: 8px;">
+                <div>
+                    <span>Hexagon Natural Fermentation</span>
+                    <small>Eco Enzyme Products</small>
+                </div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#produk">Produk</a></li>
+                <li><a href="#tentang">Tentang</a></li>
+                <li><a href="#kontak">Hubungi</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <header class="hero">
+        <div class="container">
+            <div class="tagline">🌿 Eco Enzyme · Ramah Lingkungan</div>
+            <h1>Hexagon Natural Fermentation</h1>
+            <p class="subtitle">Hexagon Natural Fermentation didirikan oleh Leonald Decristian, namun sebelum ke lini bisnis eco-enzyme, racun alami, dan parfum, Hexagon adalah sebuah club api (membakar benda). Dikarenakan oleh masalah resiko dan regulasi, bersama tim dan Direktur Utama Gavin Matthew Gwanson, Hexagon dijadikan bisnis memproduksi bahan fermentasi.</p>
+            <div class="location-badge">📍 Berbasis di <strong>Surabaya, Jawa Timur, Indonesia</strong></div>
+        </div>
+    </header>
+
+    <!-- ===== SECTION PRODUK ===== -->
+    <section id="produk">
+        <div class="container">
+            <h2 class="section-title">🧴 Produk Eco Enzyme Kami</h2>
+            <p class="section-sub">Diproduksi dengan fermentasi alami selama 1 bulan. Aman, biodegradable, dan multi-guna.</p>
+
+            <div class="product-grid">
+                <!-- Produk N1 -->
+                <div class="product-card">
+                    <div class="product-img-placeholder">
+                        📸 Foto N1 nanti diisi
+                    </div>
+                    <h3>N1</h3>
+                    <div class="price">Rp 2.000</div>
+                    <p>N1 
+Komposisi
+Pupuk sisa,Bunga,Daun,Air,Air liur,Kencing,Lem,Saus sisa,Buah kecil ,Saus kacang sisa tempat sampah,IngusT,issue,Bab tikus,Tulang ikan, Isi tip ex
+⚠WARNING: JANGAN DIHIRUP ATAU MEMEGANG CAIRAN KARENA BERSIFAT RACUN.</p>
+                </div>
+
+                <!-- Produk Flower Perfume -->
+                <div class="product-card">
+                    <div class="product-img-placeholder">
+                        📸 Foto E1 nanti diisi
+                    </div>
+                    <h3>E1</h3>
+                    <div class="price">Rp 2.000</div>
+                    <p>Parfum ini di design khusus alami tanpa kimia.</p>
+                </div>
+
+                <!-- Produk EB1 -->
+                <div class="product-card">
+                    <div class="product-img-placeholder">
+                        📸 Foto EB1 nanti diisi
+                    </div>
+                    <h3>EB1</h3>
+                    <div class="price">Rp 4.000</div>
+                    <p>EB1
+Komposisi:
+Pisang, Air, daun, makanan sisa, tanah
+Manfaat:
+Menyiram tanaman agar lebih segar dan bertumbuh lebih cepat</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION TENTANG ===== -->
+    <section id="tentang">
+        <div class="container">
+            <h2 class="section-title">🏭 Tentang Kami</h2>
+            <div class="about-wrapper">
+                <div class="about-text">
+                    <p><strong>Hexagon Natural Fermentation</strong> hadir di <span class="highlight-location">📍 Surabaya</span> sebagai solusi pengolahan sampah organik menjadi produk bernilai guna.</p>
+                    <p>Kami memproduksi <strong>Eco Enzyme</strong> dari kulit buah dan sayuran pilihan menggunakan metode fermentasi anaerobik. Proses ini menghasilkan cairan multiguna yang bisa dipakai sebagai pembersih ramah lingkungan, pupuk organik cair, hingga penjernih air.</p>
+                    <p>🌱 <strong>Visi kami:</strong> Mengurangi sampah organik di Surabaya dan sekitarnya, sekaligus memberikan alternatif produk rumah tangga yang bebas bahan kimia berbahaya.</p>
+                </div>
+                <div class="about-image">
+                    <div class="about-img-placeholder">
+                        📸 Foto proses produksi nanti
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION KONTAK ===== -->
+    <section id="kontak">
+        <div class="container">
+            <h2 class="section-title">📞 Hubungi Kami</h2>
+            <p class="section-sub">Butuh Eco Enzyme untuk rumah, kebun, atau bisnis? Chat aja!</p>
+
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <span class="icon">📱</span>
+                    <h4>WhatsApp</h4>
+                    <p>+62 818 0386 0935</p>
+                </div>
+                <div class="contact-info">
+                    <span class="icon">📧</span>
+                    <h4>Email</h4>
+                    <p>gavinmg277@gmail.com</p>
+                </div>
+                <div class="contact-info">
+                    <span class="icon">📍</span>
+                    <h4>Alamat</h4>
+                    <p>Surabaya, Jawa Timur</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="container">
+            &copy; 2026 <span>PT Hexagon Natural Fermentation</span> — Eco Enzyme from Surabaya 🇮🇩
+        </div>
+    </footer>
+
+    <!-- ===== Smooth Scroll JS ===== -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
