@@ -276,9 +276,7 @@
 <nav>
     <div class="container nav-wrapper">
         <div class="logo-nav">
-            <!-- KOSONGKAN LOGO: ganti src="images/logo-ezstore.png" nanti -->
-           <img src="images/ezstorelogo.jpeg" alt="Logo EzStore" style="height:48px; width:auto;" id="logoImg">
-            <div class="logo-placeholder" id="logoPlaceholder">EZ</div>
+            <img src="ezstorelogo.jpeg" alt="Logo EzStore" style="height:48px; width:auto; border-radius:8px;" id="logoImg">
             <div class="brand">
                 EzStore
                 <small>by Hexagon Group</small>
@@ -384,112 +382,94 @@
 
 <script>
     // Data produk (kamu tinggal ganti-ganti di sini)
-    const products = {
-        ml: {
-            label: 'Mobile Legends',
-            items: [
-                { name: '5 Diamond', price: 3500 },
-                { name: '10 Diamond', price: 5000 },
-                { name: '18 Diamond', price: 6000 },
-                { name: '28 Diamond', price: 10000 },
-                { name: '36 Diamond', price: 12000 },
-                { name: '59 Diamond', price: 17000 },
-                { name: '85 Diamond', price: 24000 },
-                { name: 'Weekly Diamond Price', price: 30000 }
-            ]
-        },
-        ff: {
-            label: 'Free Fire',
-            items: [
-                { name: '12 Diamond', price: 4000 },
-                { name: '25 Diamond', price: 6000 },
-                { name: '53 Diamond', price: 10000 },
-                { name: '70 Diamond', price: 11000 },
-                { name: '140 Diamond', price: 19000 },
-                { name: '210 Diamond', price: 28000 },
-                { name: '510 Diamond, price: 65000 }
-            ]
-        },
-        robux: {
-            label: 'Roblox Gift Card',
-            items: [
-                { name: 'IDR 50k', price: 48000 },
-                { name: 'IDR 65k', price: 63000 },
-                { name: 'IDR 83k', price: 87000 },
-                { name: 'IDR 100k', price: 95000 },
-                { name: 'IDR 180k', price: 170000 }
-            ]
-        }
-    };
-
-    function updateItems() {
-        const game = document.getElementById('game').value;
-        const itemSelect = document.getElementById('item');
-        const data = products[game];
-        if (!data) return;
-        itemSelect.innerHTML = '';
-        data.items.forEach((item, index) => {
-            const opt = document.createElement('option');
-            opt.value = index;
-            opt.textContent = `${item.name} - Rp ${item.price.toLocaleString()}`;
-            itemSelect.appendChild(opt);
-        });
-        updatePrice();
+const products = {
+    ml: {
+        label: 'Mobile Legends',
+        items: [
+            { name: '5 Diamond', price: 3500 },
+            { name: '10 Diamond', price: 5000 },
+            { name: '18 Diamond', price: 6000 },
+            { name: '28 Diamond', price: 10000 },
+            { name: '36 Diamond', price: 12000 },
+            { name: '59 Diamond', price: 17000 },
+            { name: '85 Diamond', price: 24000 },
+            { name: 'Weekly Diamond Price', price: 30000 }
+        ]
+    },
+    ff: {
+        label: 'Free Fire',
+        items: [
+            { name: '12 Diamond', price: 4000 },
+            { name: '25 Diamond', price: 6000 },
+            { name: '53 Diamond', price: 10000 },
+            { name: '70 Diamond', price: 11000 },
+            { name: '140 Diamond', price: 19000 },
+            { name: '210 Diamond', price: 28000 },
+            { name: '510 Diamond', price: 65000 }   // <- ini diperbaiki
+        ]
+    },
+    robux: {
+        label: 'Roblox Gift Card',
+        items: [
+            { name: 'IDR 50k', price: 48000 },
+            { name: 'IDR 65k', price: 63000 },
+            { name: 'IDR 83k', price: 87000 },
+            { name: 'IDR 100k', price: 95000 },
+            { name: 'IDR 180k', price: 170000 }
+        ]
     }
+};
 
-    function updatePrice() {
-        const game = document.getElementById('game').value;
-        const idx = parseInt(document.getElementById('item').value);
-        const data = products[game];
-        if (!data || isNaN(idx)) return;
-        const item = data.items[idx];
-        if (item) {
-            document.getElementById('priceDisplay').textContent = `Rp ${item.price.toLocaleString()}`;
-        }
+function updateItems() {
+    const game = document.getElementById('game').value;
+    const itemSelect = document.getElementById('item');
+    const data = products[game];
+    if (!data) return;
+    itemSelect.innerHTML = '';
+    data.items.forEach((item, index) => {
+        const opt = document.createElement('option');
+        opt.value = index;
+        opt.textContent = item.name + ' - Rp ' + item.price.toLocaleString();
+        itemSelect.appendChild(opt);
+    });
+    updatePrice();
+}
+
+function updatePrice() {
+    const game = document.getElementById('game').value;
+    const idx = parseInt(document.getElementById('item').value);
+    const data = products[game];
+    if (!data || isNaN(idx)) return;
+    const item = data.items[idx];
+    if (item) {
+        document.getElementById('priceDisplay').textContent = 'Rp ' + item.price.toLocaleString();
     }
+}
 
-    function showQR() {
-        const game = document.getElementById('game').value;
-        const idx = parseInt(document.getElementById('item').value);
-        const userid = document.getElementById('userid').value.trim();
-        const data = products[game];
-        if (!data || isNaN(idx)) return;
-        const item = data.items[idx];
-        if (!userid) {
-            alert('Mohon isi User ID / Username terlebih dahulu!');
-            return;
-        }
-        document.getElementById('qrSection').classList.add('show');
-        const waLink = document.querySelector('.btn-wa');
-        const msg = `Halo EzStore, saya mau topup ${data.label} - ${item.name} (Rp ${item.price.toLocaleString()}) untuk ID: ${userid}. Saya sudah transfer.`;
-        waLink.href = `https://wa.me/62818039360935?text=${encodeURIComponent(msg)}`;
-        document.getElementById('qrSection').scrollIntoView({ behavior: 'smooth', block: 'center' });
+function showQR() {
+    const game = document.getElementById('game').value;
+    const idx = parseInt(document.getElementById('item').value);
+    const userid = document.getElementById('userid').value.trim();
+    const data = products[game];
+    if (!data || isNaN(idx)) return;
+    const item = data.items[idx];
+    if (!userid) {
+        alert('Mohon isi User ID / Username terlebih dahulu!');
+        return;
     }
+    document.getElementById('qrSection').classList.add('show');
+    const waLink = document.querySelector('.btn-wa');
+    const msg = 'Halo EzStore, saya mau topup ' + data.label + ' - ' + item.name + ' (Rp ' + item.price.toLocaleString() + ') untuk ID: ' + userid + '. Saya sudah transfer.';
+    waLink.href = 'https://wa.me/62818039360935?text=' + encodeURIComponent(msg);
+    document.getElementById('qrSection').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
 
-    // Logo: sembunyikan placeholder, tampilkan gambar kalau ada
-    function initLogo() {
-        const img = document.getElementById('logoImg');
-        const placeholder = document.getElementById('logoPlaceholder');
-        // Coba load gambar, kalau gagal tetap tampilkan placeholder
-        img.onerror = function() {
-            img.style.display = 'none';
-            placeholder.style.display = 'flex';
-        };
-        img.onload = function() {
-            img.style.display = 'block';
-            placeholder.style.display = 'none';
-        };
-        // Kalau src kosong, tetap tampilkan placeholder
-        if (!img.src || img.src === window.location.href) {
-            img.style.display = 'none';
-            placeholder.style.display = 'flex';
-        }
-    }
-
-    // Inisialisasi
-    updateItems();
+// Event listener saat halaman siap
+document.addEventListener('DOMContentLoaded', function() {
+    // Event untuk ganti game
+    document.getElementById('game').addEventListener('change', updateItems);
+    // Event untuk ganti item
     document.getElementById('item').addEventListener('change', updatePrice);
-    initLogo();
-</script>
-</body>
-</html>
+    // Jalankan pertama kali
+    updateItems();
+});
