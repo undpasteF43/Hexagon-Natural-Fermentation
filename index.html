@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hexagon Group - Topup Game & Gift Card</title>
+    <title>EzStore</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
@@ -48,26 +48,32 @@
             align-items: center;
             gap: 12px;
         }
-        .logo-hex {
-            width: 44px;
-            height: 44px;
+        .logo-nav img {
+            height: 48px;
+            width: auto;
+            border-radius: 8px;
+        }
+        /* Placeholder kalau belum ada logo */
+        .logo-placeholder {
+            width: 48px;
+            height: 48px;
             background: #1a2a6c;
-            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #fff;
             font-weight: 800;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             flex-shrink: 0;
         }
-        .logo-nav span {
+        .logo-nav .brand {
             font-weight: 700;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: #1a2a6c;
             letter-spacing: -0.3px;
         }
-        .logo-nav small {
+        .logo-nav .brand small {
             display: block;
             font-weight: 400;
             font-size: 0.7rem;
@@ -95,7 +101,7 @@
             text-align: center;
         }
         .hero h1 {
-            font-size: 2.6rem;
+            font-size: 2.8rem;
             font-weight: 800;
             color: #1a2a6c;
         }
@@ -113,6 +119,11 @@
             display: inline-block;
             font-weight: 600;
             font-size: 0.9rem;
+        }
+        .hero .byline {
+            margin-top: 8px;
+            font-size: 0.9rem;
+            color: #6a7a8a;
         }
 
         /* Section */
@@ -194,7 +205,7 @@
         }
         .btn-order:hover { background: #0f1a4a; transform: scale(1.02); }
 
-        /* QR & Instruksi (muncul setelah klik order) */
+        /* QR & Instruksi */
         .qr-section {
             display: none;
             margin-top: 30px;
@@ -241,7 +252,15 @@
             text-align: center;
             font-size: 0.9rem;
         }
-        footer span { color: #d0daea; font-weight: 600; }
+        footer .footer-brand { 
+            color: #d0daea; 
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        footer .footer-sub {
+            color: #8a9aaa;
+            font-size: 0.8rem;
+        }
 
         /* Responsive */
         @media (max-width: 700px) {
@@ -257,10 +276,12 @@
 <nav>
     <div class="container nav-wrapper">
         <div class="logo-nav">
-            <div class="logo-hex">H</div>
-            <div>
-                <span>Hexagon Group</span>
-                <small>Topup & Gift Card</small>
+            <!-- KOSONGKAN LOGO: ganti src="images/logo-ezstore.png" nanti -->
+           <img src="images/ezstorelogo.jpeg" alt="Logo EzStore" style="height:48px; width:auto;" id="logoImg">
+            <div class="logo-placeholder" id="logoPlaceholder">EZ</div>
+            <div class="brand">
+                EzStore
+                <small>by Hexagon Group</small>
             </div>
         </div>
         <ul class="nav-links">
@@ -272,9 +293,10 @@
 
 <header class="hero">
     <div class="container">
-        <div class="badge">⚡ Cepat · Aman · Terpercaya</div>
-        <h1>Hexagon Group</h1>
-        <p class="sub">Topup Diamond ML, Free Fire, dan Gift Card Roblox. Khusus untuk siswa satu sekolah!</p>
+        <div class="badge">⚡ Cepat · Aman · Gampang</div>
+        <h1>EzStore</h1>
+        <p class="sub">Topup Diamond ML, Free Fire, dan Gift Card Roblox.<p>
+        <div class="byline">📍 Surabaya, Indonesia</div>
     </div>
 </header>
 
@@ -312,17 +334,17 @@
 
             <!-- QR & Instruksi Pembayaran -->
             <div id="qrSection" class="qr-section">
-                <h3 style="margin-bottom:10px;">📸 Scan QR untuk Bayar</h3>
-                <!-- Ganti src dengan file QR code kamu nanti -->
-                <img src="images/qr-placeholder.png" alt="QR Code" id="qrImage" 
-                     onerror="this.src='https://picsum.photos/seed/qr/400/400'; this.alt='QR placeholder'">
+                <h3 style="margin-bottom:10px;">📸 Scan QRIS untuk Bayar</h3>
+                <!-- QRIS: ganti src dengan file qris kamu nanti -->
+                <img src="images/qris-placeholder.png" alt="QRIS" id="qrImage" 
+                     onerror="this.src='https://picsum.photos/seed/qris/400/400'; this.alt='QRIS placeholder'">
                 <div class="bank-info">
-                    <p>💳 Transfer ke:</p>
-                    <p style="font-size:1.1rem;">BCA 1234567890 a.n. Hexagon Group</p>
+                    <p>💳 Transfer via QRIS / Bank:</p>
+                    <p style="font-size:1.1rem;">BCA 1234567890 a.n. EzStore</p>
                     <p style="font-weight:400; color:#4a5a6a;">Nominal sesuai harga yang dipilih</p>
                 </div>
                 <p><strong>📌 Setelah transfer, kirim bukti & ID ke WhatsApp kami</strong></p>
-                <a href="https://wa.me/6281234567890?text=Halo%20Hexagon%20Group%2C%20saya%20ingin%20topup%3A" 
+                <a href="https://wa.me/62818039360935?text=Halo%20EzStore%2C%20saya%20ingin%20topup%3A" 
                    target="_blank" class="btn-wa">📱 Konfirmasi via WhatsApp</a>
                 <p style="margin-top:12px; font-size:0.9rem; color:#5a6a7a;">
                     Pesanan akan diproses dalam 5-30 menit.
@@ -339,12 +361,12 @@
             <div style="background:#fff; padding:20px 30px; border-radius:20px; min-width:200px; border:1px solid #eef0f4;">
                 <div style="font-size:2rem;">📱</div>
                 <h4>WhatsApp</h4>
-                <p>0812-3456-7890</p>
+                <p>+62 818-0386-0935</p>
             </div>
             <div style="background:#fff; padding:20px 30px; border-radius:20px; min-width:200px; border:1px solid #eef0f4;">
                 <div style="font-size:2rem;">📍</div>
                 <h4>Lokasi</h4>
-                <p>Surabaya (khusus 1 sekolah)</p>
+                <p>Surabaya, Indonesia</p>
             </div>
         </div>
     </div>
@@ -352,7 +374,11 @@
 
 <footer>
     <div class="container">
-        &copy; 2026 <span>Hexagon Group</span> — Topup Game & Gift Card
+        <div class="footer-brand">EzStore International</div>
+        <div class="footer-sub">by Hexagon Group</div>
+        <div style="margin-top:8px; font-size:0.8rem; color:#7a8a9a;">
+            &copy; 2026 EzStore International — Surabaya, Indonesia
+        </div>
     </div>
 </footer>
 
@@ -433,21 +459,37 @@
             alert('Mohon isi User ID / Username terlebih dahulu!');
             return;
         }
-        // Tampilkan QR dan instruksi
         document.getElementById('qrSection').classList.add('show');
-        // Update link WhatsApp dengan pesan otomatis
         const waLink = document.querySelector('.btn-wa');
-        const msg = `Halo Hexagon Group, saya mau topup ${data.label} - ${item.name} (Rp ${item.price.toLocaleString()}) untuk ID: ${userid}. Saya sudah transfer.`;
-        waLink.href = `https://wa.me/6281234567890?text=${encodeURIComponent(msg)}`;
-        // Scroll ke QR
+        const msg = `Halo EzStore, saya mau topup ${data.label} - ${item.name} (Rp ${item.price.toLocaleString()}) untuk ID: ${userid}. Saya sudah transfer.`;
+        waLink.href = `https://wa.me/62818039360935?text=${encodeURIComponent(msg)}`;
         document.getElementById('qrSection').scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
-    // Inisialisasi pertama
-    updateItems();
+    // Logo: sembunyikan placeholder, tampilkan gambar kalau ada
+    function initLogo() {
+        const img = document.getElementById('logoImg');
+        const placeholder = document.getElementById('logoPlaceholder');
+        // Coba load gambar, kalau gagal tetap tampilkan placeholder
+        img.onerror = function() {
+            img.style.display = 'none';
+            placeholder.style.display = 'flex';
+        };
+        img.onload = function() {
+            img.style.display = 'block';
+            placeholder.style.display = 'none';
+        };
+        // Kalau src kosong, tetap tampilkan placeholder
+        if (!img.src || img.src === window.location.href) {
+            img.style.display = 'none';
+            placeholder.style.display = 'flex';
+        }
+    }
 
-    // Bisa juga langsung update harga saat ganti item
+    // Inisialisasi
+    updateItems();
     document.getElementById('item').addEventListener('change', updatePrice);
+    initLogo();
 </script>
 </body>
 </html>
