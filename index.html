@@ -25,7 +25,6 @@
             padding: 0 20px;
         }
 
-        /* Navbar */
         nav {
             background-color: #ffffff;
             box-shadow: 0 2px 12px rgba(0,0,0,0.06);
@@ -52,20 +51,6 @@
             height: 48px;
             width: auto;
             border-radius: 8px;
-        }
-        /* Placeholder kalau belum ada logo */
-        .logo-placeholder {
-            width: 48px;
-            height: 48px;
-            background: #1a2a6c;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-weight: 800;
-            font-size: 1.2rem;
-            flex-shrink: 0;
         }
         .logo-nav .brand {
             font-weight: 700;
@@ -95,7 +80,6 @@
         }
         .nav-links a:hover { color: #1a2a6c; }
 
-        /* Hero */
         .hero {
             padding: 40px 0 30px;
             text-align: center;
@@ -126,7 +110,6 @@
             color: #6a7a8a;
         }
 
-        /* Section */
         section {
             padding: 50px 0;
             border-bottom: 1px solid #eaeef2;
@@ -148,7 +131,6 @@
             margin-right: auto;
         }
 
-        /* Form Topup */
         .topup-form {
             background: #fff;
             border-radius: 24px;
@@ -174,7 +156,6 @@
             border-radius: 12px;
             font-size: 1rem;
             background: #fafbfc;
-            transition: 0.2s;
         }
         .form-group select:focus, .form-group input:focus {
             outline: none;
@@ -203,9 +184,8 @@
             transition: 0.2s;
             margin-top: 8px;
         }
-        .btn-order:hover { background: #0f1a4a; transform: scale(1.02); }
+        .btn-order:hover { background: #0f1a4a; }
 
-        /* QR & Instruksi */
         .qr-section {
             display: none;
             margin-top: 30px;
@@ -240,11 +220,9 @@
             text-decoration: none;
             font-weight: 700;
             margin: 10px 0 4px;
-            transition: 0.2s;
         }
         .btn-wa:hover { background: #1ebd5c; }
 
-        /* Footer */
         footer {
             background: #1a1e2c;
             color: #b0baca;
@@ -262,7 +240,6 @@
             font-size: 0.8rem;
         }
 
-        /* Responsive */
         @media (max-width: 700px) {
             .hero h1 { font-size: 2rem; }
             .nav-wrapper { flex-direction: column; align-items: center; }
@@ -276,7 +253,8 @@
 <nav>
     <div class="container nav-wrapper">
         <div class="logo-nav">
-            <img src="ezstorelogo.jpeg" alt="Logo EzStore" style="height:48px; width:auto; border-radius:8px;" id="logoImg">
+            <!-- Ganti path logo sesuai lokasi file kamu -->
+            <img src="images/ezstorelogo.jpeg" alt="Logo EzStore" id="logoImg">
             <div class="brand">
                 EzStore
                 <small>by Hexagon Group</small>
@@ -293,7 +271,7 @@
     <div class="container">
         <div class="badge">⚡ Gampang · Cepat · Aman</div>
         <h1>EzStore</h1>
-        <p class="sub">Topup Diamond ML, Free Fire, dan Gift Card Roblox.<p>
+        <p class="sub">Topup Diamond ML, Free Fire, dan Gift Card Roblox.</p>
         <div class="byline">📍 Surabaya, Indonesia</div>
     </div>
 </header>
@@ -306,7 +284,7 @@
         <div class="topup-form">
             <div class="form-group">
                 <label for="game">Pilih Game / Gift</label>
-                <select id="game" onchange="updateItems()">
+                <select id="game">
                     <option value="ml">Mobile Legends</option>
                     <option value="ff">Free Fire</option>
                     <option value="robux">Roblox Gift Card</option>
@@ -315,7 +293,7 @@
 
             <div class="form-group">
                 <label for="item">Pilih Item</label>
-                <select id="item" onchange="updatePrice()"></select>
+                <select id="item"></select>
             </div>
 
             <div class="form-group">
@@ -330,10 +308,8 @@
 
             <button class="btn-order" onclick="showQR()">Pesan Sekarang</button>
 
-            <!-- QR & Instruksi Pembayaran -->
             <div id="qrSection" class="qr-section">
                 <h3 style="margin-bottom:10px;">📸 Scan QRIS untuk Bayar</h3>
-                <!-- QRIS: ganti src dengan file qris kamu nanti -->
                 <img src="images/qris-placeholder.png" alt="QRIS" id="qrImage" 
                      onerror="this.src='https://picsum.photos/seed/qris/400/400'; this.alt='QRIS placeholder'">
                 <div class="bank-info">
@@ -381,7 +357,7 @@
 </footer>
 
 <script>
-    // Data produk (kamu tinggal ganti-ganti di sini)
+// ===== DATA PRODUK =====
 const products = {
     ml: {
         label: 'Mobile Legends',
@@ -405,7 +381,7 @@ const products = {
             { name: '70 Diamond', price: 11000 },
             { name: '140 Diamond', price: 19000 },
             { name: '210 Diamond', price: 28000 },
-            { name: '510 Diamond', price: 65000 }   // <- ini diperbaiki
+            { name: '510 Diamond', price: 65000 }
         ]
     },
     robux: {
@@ -420,11 +396,13 @@ const products = {
     }
 };
 
+// ===== FUNGSI =====
 function updateItems() {
     const game = document.getElementById('game').value;
     const itemSelect = document.getElementById('item');
     const data = products[game];
     if (!data) return;
+    
     itemSelect.innerHTML = '';
     data.items.forEach((item, index) => {
         const opt = document.createElement('option');
@@ -464,12 +442,13 @@ function showQR() {
     document.getElementById('qrSection').scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
-// Event listener saat halaman siap
+// ===== EVENT LISTENER =====
 document.addEventListener('DOMContentLoaded', function() {
-    // Event untuk ganti game
     document.getElementById('game').addEventListener('change', updateItems);
-    // Event untuk ganti item
     document.getElementById('item').addEventListener('change', updatePrice);
-    // Jalankan pertama kali
     updateItems();
 });
+</script>
+
+</body>
+</html>
